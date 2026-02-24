@@ -1,0 +1,873 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Portfólio de Alexandre Marreiros — Full Stack, Dados/BI e Automação. Laravel, PostgreSQL, Power BI, Python e Docker." />
+  <title>Alexandre Marreiros — Portfólio</title>
+
+  <style>
+    :root{
+      --bg:#0b1020;
+      --bg2:#0f1730;
+      --card:rgba(255,255,255,.06);
+      --card2:rgba(255,255,255,.08);
+      --border:rgba(255,255,255,.10);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.68);
+      --soft:rgba(255,255,255,.55);
+      --brand:#7c5cff;
+      --brand2:#35d0ff;
+      --ok:#38f08a;
+      --warn:#ffd166;
+      --danger:#ff5c7a;
+
+      --radius:18px;
+      --radius2:26px;
+      --shadow: 0 12px 30px rgba(0,0,0,.35);
+      --max:1120px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 15% 10%, rgba(124,92,255,.25), transparent 60%),
+                  radial-gradient(900px 700px at 80% 30%, rgba(53,208,255,.18), transparent 55%),
+                  linear-gradient(180deg, var(--bg), var(--bg2));
+      color:var(--text);
+      line-height:1.5;
+      overflow-x:hidden;
+    }
+
+    a{color:inherit; text-decoration:none}
+    .container{width:min(var(--max), calc(100% - 40px)); margin-inline:auto}
+
+    /* Topbar */
+    .topbar{
+      position:sticky; top:0; z-index:1000;
+      backdrop-filter: blur(14px);
+      background: rgba(11,16,32,.55);
+      border-bottom:1px solid var(--border);
+    }
+    .topbar-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+      gap:14px;
+    }
+    .logo{
+      display:flex; align-items:center; gap:12px;
+      font-weight:700;
+      letter-spacing:.3px;
+    }
+    .logo-badge{
+      width:36px; height:36px; border-radius:12px;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 10px 18px rgba(124,92,255,.22);
+    }
+    nav{display:flex; align-items:center; gap:18px}
+    nav a{
+      color:var(--muted);
+      font-weight:600;
+      font-size:14px;
+      padding:10px 10px;
+      border-radius:12px;
+    }
+    nav a:hover{background:rgba(255,255,255,.06); color:var(--text)}
+    .actions{display:flex; align-items:center; gap:10px}
+
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:11px 14px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.05);
+      color:var(--text);
+      font-weight:700;
+      font-size:14px;
+      cursor:pointer;
+      box-shadow: 0 0 0 rgba(0,0,0,0);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      user-select:none;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.07); border-color: rgba(255,255,255,.16)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(124,92,255,.95), rgba(53,208,255,.90));
+      border-color: rgba(255,255,255,.12);
+    }
+    .btn.primary:hover{background: linear-gradient(135deg, rgba(124,92,255,1), rgba(53,208,255,1))}
+    .btn.ghost{background: transparent}
+    .btn.small{padding:9px 12px; border-radius:12px; font-size:13px}
+
+    .hamb{
+      display:none;
+      width:42px; height:42px;
+      border-radius:14px;
+    }
+
+    /* Mobile menu */
+    .mobile{
+      display:none;
+      padding:0 0 16px 0;
+    }
+    .mobile a{
+      display:block;
+      padding:12px 10px;
+      border-radius:14px;
+      color:var(--muted);
+      font-weight:650;
+    }
+    .mobile a:hover{background:rgba(255,255,255,.06); color:var(--text)}
+    .mobile .row{display:flex; gap:10px; flex-wrap:wrap; padding-top:10px}
+
+    /* Hero */
+    .hero{padding:64px 0 30px 0}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:26px;
+      align-items:stretch;
+    }
+    .chip-row{display:flex; flex-wrap:wrap; gap:10px; margin-bottom:16px}
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid var(--border);
+      color:var(--muted);
+      font-weight:650;
+      font-size:13px;
+    }
+    .chip i{display:inline-block; width:10px; height:10px; border-radius:3px; background:linear-gradient(135deg, var(--brand), var(--brand2))}
+    h1{
+      margin:0;
+      font-size: clamp(32px, 4vw, 46px);
+      line-height:1.08;
+      letter-spacing:-.6px;
+    }
+    .subtitle{
+      margin:14px 0 0 0;
+      color:var(--muted);
+      font-size:16px;
+      max-width: 60ch;
+    }
+    .cta-row{display:flex; gap:12px; flex-wrap:wrap; margin-top:20px}
+
+    .panel{
+      border:1px solid var(--border);
+      border-radius: var(--radius2);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .panel::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(800px 300px at 20% 20%, rgba(124,92,255,.35), transparent 60%),
+                  radial-gradient(700px 300px at 80% 30%, rgba(53,208,255,.22), transparent 60%);
+      opacity:.55;
+      pointer-events:none;
+    }
+    .panel > *{position:relative}
+    .panel-head{
+      padding:18px 18px 10px 18px;
+      display:flex; align-items:flex-start; justify-content:space-between;
+      gap:12px;
+    }
+    .panel-title{
+      margin:0;
+      font-weight:800;
+      letter-spacing:-.3px;
+    }
+    .panel-sub{
+      margin:6px 0 0 0;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .kpis{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap:12px;
+      padding:0 18px 18px 18px;
+    }
+    .kpi{
+      border:1px solid var(--border);
+      background: rgba(0,0,0,.16);
+      border-radius: 18px;
+      padding:12px;
+    }
+    .kpi .label{color:var(--soft); font-size:12px; font-weight:700}
+    .kpi .value{font-size:18px; font-weight:900; margin-top:6px}
+    .kpi .hint{color:var(--muted); font-size:12px; margin-top:4px}
+
+    /* Sections */
+    section{padding:42px 0}
+    .section-head{
+      display:flex; align-items:flex-end; justify-content:space-between;
+      gap:18px;
+      margin-bottom:16px;
+    }
+    h2{
+      margin:0;
+      font-size:22px;
+      letter-spacing:-.2px;
+    }
+    .section-desc{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      max-width: 72ch;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+    }
+    .card{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.04);
+      border-radius: var(--radius);
+      padding:16px;
+      box-shadow: 0 10px 20px rgba(0,0,0,.22);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+    .card:hover{transform: translateY(-2px); background: rgba(255,255,255,.055); border-color: rgba(255,255,255,.16)}
+    .card .top{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:12px;
+      margin-bottom:10px;
+    }
+    .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      background: rgba(0,0,0,.12);
+      color:var(--muted);
+      font-weight:750;
+      font-size:12px;
+      white-space:nowrap;
+    }
+    .tag .dot{width:8px; height:8px; border-radius:3px; background: var(--brand2)}
+    .card h3{margin:0; font-size:16px; letter-spacing:-.15px}
+    .card p{margin:10px 0 0 0; color:var(--muted); font-size:13.5px}
+    .badges{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px}
+    .badge{
+      padding:6px 9px;
+      border-radius:999px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      color:rgba(255,255,255,.78);
+      font-weight:700;
+      font-size:12px;
+    }
+    .card .links{display:flex; flex-wrap:wrap; gap:10px; margin-top:14px}
+    .link{
+      color: rgba(255,255,255,.85);
+      font-weight:800;
+      font-size:13px;
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+    }
+    .link:hover{background: rgba(255,255,255,.06)}
+    .split{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:14px;
+    }
+
+    /* Footer */
+    footer{
+      padding:26px 0 40px 0;
+      border-top:1px solid var(--border);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .footer-inner{display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap}
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,.65);
+      border:1px solid rgba(255,255,255,.14);
+      color: rgba(255,255,255,.92);
+      padding: 10px 12px;
+      border-radius: 14px;
+      font-weight: 800;
+      font-size: 13px;
+      opacity: 0;
+      pointer-events:none;
+      transition: opacity .15s ease, transform .15s ease;
+      backdrop-filter: blur(12px);
+    }
+    .toast.show{
+      opacity: 1;
+      transform: translateX(-50%) translateY(-2px);
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-grid{grid-template-columns: 1fr}
+      .grid{grid-template-columns: repeat(2, 1fr)}
+      .split{grid-template-columns: 1fr}
+    }
+    @media (max-width: 720px){
+      nav{display:none}
+      .hamb{display:inline-flex}
+      .mobile{display:block}
+      .grid{grid-template-columns: 1fr}
+      .kpis{grid-template-columns: 1fr}
+      .hero{padding-top:44px}
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="container">
+      <div class="topbar-inner">
+        <a class="logo" href="#top">
+          <span class="logo-badge" aria-hidden="true"></span>
+          <span>Alexandre Marreiros</span>
+        </a>
+
+        <nav aria-label="Navegação principal">
+          <a href="#projetos">Projetos</a>
+          <a href="#competencias">Competências</a>
+          <a href="#stack">Stack</a>
+          <a href="#sobre">Sobre</a>
+          <a href="#contato">Contato</a>
+        </nav>
+
+        <div class="actions">
+          <a class="btn small ghost" href="#contato">Falar comigo</a>
+          <button class="btn hamb" id="hambBtn" aria-label="Abrir menu" aria-expanded="false">Menu</button>
+        </div>
+      </div>
+
+      <!-- Mobile -->
+      <div class="mobile" id="mobileMenu" hidden>
+        <a href="#projetos">Projetos</a>
+        <a href="#competencias">Competências</a>
+        <a href="#stack">Stack</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#contato">Contato</a>
+        <div class="row">
+          <a class="btn small primary" href="#contato">Orçamento / Conversa</a>
+          <a class="btn small" href="#projetos">Ver cases</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main id="top" class="container">
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="chip-row">
+            <span class="chip"><i></i> Full Stack (Laravel)</span>
+            <span class="chip"><i></i> Dados / BI (Power BI, DAX)</span>
+            <span class="chip"><i></i> Automação (Python + APIs)</span>
+            <span class="chip"><i></i> Infra (Docker / Prod)</span>
+          </div>
+
+          <h1>Eu transformo processos e dados em sistemas e decisões inteligentes.</h1>
+          <p class="subtitle">
+            Desenvolvimento de soluções para <strong>obras/infraestrutura</strong>, financeiro e operações:
+            PostgreSQL avançado, automações de integração/ETL e dashboards executivos com indicadores de alto nível.
+          </p>
+
+          <div class="cta-row">
+            <!-- TROQUE os links abaixo pelos seus -->
+            <a class="btn primary" href="#projetos">Ver projetos</a>
+            <a class="btn" href="#contato">Contato</a>
+            <a class="btn" href="https://www.linkedin.com/" target="_blank" rel="noreferrer">LinkedIn</a>
+            <a class="btn" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+
+          <div style="margin-top:18px; color:var(--muted); font-size:13px">
+            Disponível para: <strong>projetos sob demanda</strong> · integrações · dashboards · sistemas internos
+          </div>
+        </div>
+
+        <aside class="panel" aria-label="Resumo rápido">
+          <div class="panel-head">
+            <div>
+              <h3 class="panel-title">Resumo rápido</h3>
+              <p class="panel-sub">O que você ganha trabalhando comigo</p>
+            </div>
+            <span class="tag"><span class="dot"></span> foco em resultado</span>
+          </div>
+
+          <div class="kpis">
+            <div class="kpi">
+              <div class="label">Especialidade</div>
+              <div class="value">Dados + Sistemas</div>
+              <div class="hint">SQL, BI, automação e backend</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Contexto forte</div>
+              <div class="value">Obras / Rodovia</div>
+              <div class="hint">Operação, contratos, relatórios</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Entrega</div>
+              <div class="value">Prod-ready</div>
+              <div class="hint">Docker, deploy, persistência</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Dados difíceis</div>
+              <div class="value">Regras complexas</div>
+              <div class="hint">ciclos, IRRF, antecipação</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Projetos -->
+    <section id="projetos">
+      <div class="section-head">
+        <div>
+          <h2>Projetos em destaque</h2>
+          <p class="section-desc">
+            Alguns dos tipos de solução que você já me viu construir (e que posso repetir/expandir com você).
+          </p>
+        </div>
+        <a class="btn small" href="#contato">Quero algo parecido</a>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <div class="top">
+            <h3>Financeiro por ciclo (credenciados)</h3>
+            <span class="tag"><span class="dot"></span> PostgreSQL</span>
+          </div>
+          <p>
+            Views e consolidações para contas a pagar por ciclo: regras de IRRF, antecipações, cancelamentos com débito futuro,
+            e resumo final por credenciado.
+          </p>
+          <div class="badges">
+            <span class="badge">CTEs</span><span class="badge">Window Functions</span><span class="badge">Views</span><span class="badge">Regras de negócio</span>
+          </div>
+          <div class="links">
+            <a class="link" href="#" title="Link do case (opcional)">Case</a>
+            <a class="link" href="#" title="Link do repositório (opcional)">Repo</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="top">
+            <h3>Dashboards executivos (Power BI)</h3>
+            <span class="tag"><span class="dot"></span> DAX</span>
+          </div>
+          <p>
+            Indicadores avançados (YoY, percentil histórico, participação por estação/cidade, criticidade por faixa de KM)
+            com filtros e interação entre visuais.
+          </p>
+          <div class="badges">
+            <span class="badge">Power BI</span><span class="badge">DAX</span><span class="badge">Modelagem</span><span class="badge">KPI</span>
+          </div>
+          <div class="links">
+            <a class="link" href="#" title="Link do dashboard (opcional)">Preview</a>
+            <a class="link" href="#" title="PDF (opcional)">PDF</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="top">
+            <h3>Automação de APIs + ETL</h3>
+            <span class="tag"><span class="dot"></span> Python</span>
+          </div>
+          <p>
+            Integrações com APIs (login/token, download, sincronização incremental),
+            persistindo em PostgreSQL com logs, janelas de data e tratamento de erro.
+          </p>
+          <div class="badges">
+            <span class="badge">Requests</span><span class="badge">Psycopg</span><span class="badge">Logging</span><span class="badge">ETL</span>
+          </div>
+          <div class="links">
+            <a class="link" href="#" title="Repo (opcional)">Repo</a>
+            <a class="link" href="#" title="Docs (opcional)">Docs</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="top">
+            <h3>Diário de obras (offline-first)</h3>
+            <span class="tag"><span class="dot"></span> App</span>
+          </div>
+          <p>
+            Projeto pensado para internet instável: registro por dia/turno, clima por período,
+            assinatura, muitas fotos, e sincronização quando voltar rede.
+          </p>
+          <div class="badges">
+            <span class="badge">Multiempresa</span><span class="badge">Sincronização</span><span class="badge">Upload</span><span class="badge">Auditoria</span>
+          </div>
+          <div class="links">
+            <a class="link" href="#" title="Documento técnico (opcional)">Spec</a>
+            <a class="link" href="#" title="Demo (opcional)">Demo</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="top">
+            <h3>Infra produção (Docker + Portainer)</h3>
+            <span class="tag"><span class="dot"></span> DevOps</span>
+          </div>
+          <p>
+            Ambientes prontos para produção: Dockerfile, compose, volumes persistentes, deploy automatizado
+            e ecossistema com Metabase/Airflow/Redis/Postgres.
+          </p>
+          <div class="badges">
+            <span class="badge">Docker</span><span class="badge">Compose</span><span class="badge">Portainer</span><span class="badge">Observabilidade</span>
+          </div>
+          <div class="links">
+            <a class="link" href="#" title="Infra docs (opcional)">Docs</a>
+            <a class="link" href="#" title="Template (opcional)">Template</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="top">
+            <h3>Excel avançado (Power Query/VBA)</h3>
+            <span class="tag"><span class="dot"></span> Excel</span>
+          </div>
+          <p>
+            Modelos com fórmulas robustas (PROCX, ÍNDICE, SOMASES), Power Query (M),
+            automação de relatórios e padronização de códigos (PEP).
+          </p>
+          <div class="badges">
+            <span class="badge">Power Query</span><span class="badge">VBA</span><span class="badge">Fórmulas</span><span class="badge">Relatórios</span>
+          </div>
+          <div class="links">
+            <a class="link" href="#" title="Exemplo (opcional)">Exemplo</a>
+            <a class="link" href="#" title="Modelo (opcional)">Modelo</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Competências -->
+    <section id="competencias">
+      <div class="section-head">
+        <div>
+          <h2>Competências</h2>
+          <p class="section-desc">
+            O que eu costumo assumir ponta a ponta: da regra de negócio ao deploy, com dados bem modelados e painéis que ajudam a decidir.
+          </p>
+        </div>
+      </div>
+
+      <div class="split">
+        <div class="card">
+          <div class="top">
+            <h3>Construção de sistemas</h3>
+            <span class="tag"><span class="dot"></span> Laravel</span>
+          </div>
+          <p>
+            Backend com regras complexas, autenticação multiempresa, APIs bem definidas, modelagem e consistência.
+            Foco em manutenção e evolução.
+          </p>
+          <div class="badges">
+            <span class="badge">Arquitetura</span><span class="badge">APIs</span><span class="badge">Boas práticas</span><span class="badge">Segurança</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="top">
+            <h3>Dados e inteligência</h3>
+            <span class="tag"><span class="dot"></span> BI</span>
+          </div>
+          <p>
+            Modelagem para BI, medidas DAX, indicadores executivos e leitura por criticidade
+            (por trecho, faixa de KM, empresa, etc.).
+          </p>
+          <div class="badges">
+            <span class="badge">Modelagem</span><span class="badge">DAX</span><span class="badge">KPI</span><span class="badge">Storytelling</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="top">
+            <h3>Automação e integrações</h3>
+            <span class="tag"><span class="dot"></span> Python</span>
+          </div>
+          <p>
+            Integração com sistemas externos, rotinas de sincronização e pipelines simples e confiáveis.
+            Tratamento de erro e logs para suporte.
+          </p>
+          <div class="badges">
+            <span class="badge">ETL</span><span class="badge">APIs</span><span class="badge">Logs</span><span class="badge">Incremental</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="top">
+            <h3>Infra e produção</h3>
+            <span class="tag"><span class="dot"></span> Docker</span>
+          </div>
+          <p>
+            Estruturas prontas para rodar em servidor: compose, volumes, ambiente, deploy e operação com Portainer.
+          </p>
+          <div class="badges">
+            <span class="badge">Docker</span><span class="badge">Deploy</span><span class="badge">Persistência</span><span class="badge">Monitoramento</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stack -->
+    <section id="stack">
+      <div class="section-head">
+        <div>
+          <h2>Stack</h2>
+          <p class="section-desc">Ferramentas que eu uso com frequência (e entrego com consistência).</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="top">
+            <h3>Backend</h3>
+            <span class="tag"><span class="dot"></span> Core</span>
+          </div>
+          <div class="badges">
+            <span class="badge">Laravel</span><span class="badge">PHP</span><span class="badge">REST APIs</span><span class="badge">Auth</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="top">
+            <h3>Banco e SQL</h3>
+            <span class="tag"><span class="dot"></span> Data</span>
+          </div>
+          <div class="badges">
+            <span class="badge">PostgreSQL</span><span class="badge">Views</span><span class="badge">CTE</span><span class="badge">Window</span>
+            <span class="badge">Performance</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="top">
+            <h3>BI</h3>
+            <span class="tag"><span class="dot"></span> Analytics</span>
+          </div>
+          <div class="badges">
+            <span class="badge">Power BI</span><span class="badge">DAX</span><span class="badge">Power Query</span><span class="badge">Modelagem</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="top">
+            <h3>Automação</h3>
+            <span class="tag"><span class="dot"></span> Scripting</span>
+          </div>
+          <div class="badges">
+            <span class="badge">Python</span><span class="badge">Requests</span><span class="badge">Psycopg</span><span class="badge">ETL</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="top">
+            <h3>Infra</h3>
+            <span class="tag"><span class="dot"></span> Ops</span>
+          </div>
+          <div class="badges">
+            <span class="badge">Docker</span><span class="badge">Compose</span><span class="badge">Portainer</span><span class="badge">Linux</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="top">
+            <h3>Planilhas</h3>
+            <span class="tag"><span class="dot"></span> Excel</span>
+          </div>
+          <div class="badges">
+            <span class="badge">PROCX</span><span class="badge">SOMASES</span><span class="badge">VBA</span><span class="badge">Power Query (M)</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sobre -->
+    <section id="sobre">
+      <div class="section-head">
+        <div>
+          <h2>Sobre</h2>
+          <p class="section-desc">
+            Eu gosto de resolver “o chato”: regra financeira, visão por ciclo, cancelamento com débito, integração que falha,
+            dado bagunçado. E deixar tudo pronto para rodar.
+          </p>
+        </div>
+      </div>
+
+      <div class="split">
+        <div class="card">
+          <div class="top">
+            <h3>Como eu trabalho</h3>
+            <span class="tag"><span class="dot"></span> Método</span>
+          </div>
+          <p>
+            1) Entendo o processo e a dor (o que precisa melhorar).<br>
+            2) Modelo os dados para não “remendar” depois.<br>
+            3) Entrego um MVP funcional rápido e evoluo por ciclos.<br>
+            4) Documento o suficiente para manter e escalar.
+          </p>
+        </div>
+        <div class="card">
+          <div class="top">
+            <h3>O que costumo entregar</h3>
+            <span class="tag"><span class="dot"></span> Resultado</span>
+          </div>
+          <p>
+            Sistema ou automação funcionando em produção, dados consistentes no banco,
+            dashboards que respondem perguntas reais do negócio e um caminho claro de evolução.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato">
+      <div class="section-head">
+        <div>
+          <h2>Contato</h2>
+          <p class="section-desc">
+            Me chame para orçamento, parceria ou para organizar seus dados/processos. Troque os links abaixo pelos seus.
+          </p>
+        </div>
+      </div>
+
+      <div class="split">
+        <div class="card">
+          <div class="top">
+            <h3>Vamos conversar</h3>
+            <span class="tag"><span class="dot"></span> Direto</span>
+          </div>
+
+          <!-- TROQUE o e-mail -->
+          <p><strong>E-mail:</strong> <span id="emailText">marreiros.alexandresouza@gmail.com</span></p>
+
+          <div class="cta-row" style="margin-top:12px">
+            <button class="btn primary" id="copyEmailBtn" type="button">Copiar e-mail</button>
+
+            <!-- TROQUE o número/links -->
+            <a class="btn" href="https://wa.me/5569992825707" target="_blank" rel="noreferrer">WhatsApp</a>
+            <a class="btn" href="https://www.linkedin.com/in/alexandre-marreiros/" target="_blank" rel="noreferrer">LinkedIn</a>
+          </div>
+
+          <p style="margin-top:12px; color:var(--muted); font-size:13px">
+            Dica: se você me mandar 3 coisas (objetivo, fonte de dados e prazo), eu já te devolvo um caminho de solução.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="top">
+            <h3>Disponibilidade</h3>
+            <span class="tag"><span class="dot"></span> Agenda</span>
+          </div>
+          <p>
+            Atendo demandas de:
+            <br><strong>• Integrações / automação</strong>
+            <br><strong>• Banco + views + performance</strong>
+            <br><strong>• Power BI (modelagem + DAX + UX)</strong>
+            <br><strong>• Sistemas Laravel em produção</strong>
+          </p>
+          <div class="badges">
+            <span class="badge">Remoto</span>
+            <span class="badge">Escopo fechado</span>
+            <span class="badge">Evolutivo</span>
+          </div>
+          <!-- <div class="links">
+            <a class="link" href="#" title="Link para seu currículo (opcional)">Currículo (PDF)</a>
+            <a class="link" href="#" title="Link para seu calendário (opcional)">Agendar</a>
+          </div> -->
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-inner container">
+        <div>© <span id="year"></span> Alexandre Marreiros — Portfólio</div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap">
+          <a class="link" href="#top">Voltar ao topo</a>
+          <a class="link" href="#projetos">Projetos</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const id = a.getAttribute('href');
+        if (!id || id === '#') return;
+        const el = document.querySelector(id);
+        if (!el) return;
+
+        e.preventDefault();
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        // Close mobile menu if open
+        const mobile = document.getElementById('mobileMenu');
+        const hambBtn = document.getElementById('hambBtn');
+        if (mobile && !mobile.hidden) {
+          mobile.hidden = true;
+          hambBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    });
+
+    // Mobile menu toggle
+    const hambBtn = document.getElementById('hambBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (hambBtn && mobileMenu){
+      hambBtn.addEventListener('click', () => {
+        const open = mobileMenu.hidden === false;
+        mobileMenu.hidden = open;
+        hambBtn.setAttribute('aria-expanded', String(!open));
+      });
+    }
+
+    // Copy email
+    const copyBtn = document.getElementById('copyEmailBtn');
+    const emailText = document.getElementById('emailText');
+    const toast = document.getElementById('toast');
+
+    function showToast(msg){
+      if(!toast) return;
+      toast.textContent = msg;
+      toast.classList.add('show');
+      window.clearTimeout(window.__t);
+      window.__t = window.setTimeout(() => toast.classList.remove('show'), 1800);
+    }
+
+    if (copyBtn && emailText){
+      copyBtn.addEventListener('click', async () => {
+        try{
+          await navigator.clipboard.writeText(emailText.textContent.trim());
+          showToast('E-mail copiado!');
+        } catch {
+          showToast('Não consegui copiar automaticamente. Selecione e copie manualmente.');
+        }
+      });
+    }
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
